@@ -29,7 +29,7 @@ class Tarea3 extends Module
 		if(
 		!parent::install() OR
 		!$this->registerHook('displayHeader') OR
-		!$this->registerHook('displayNav')
+		!$this->registerHook('displayNav2')
 		)
 		return false;
 		return true;
@@ -40,39 +40,18 @@ class Tarea3 extends Module
 		if(
 		!parent::uninstall() OR
 		!$this->unregisterHook('displayHeader') OR
-		!$this->unregisterHook('displayNav')
+		!$this->unregisterHook('displayNav2')
 		)
 		return false;
 		return true;
 	}
 	
-	public function getContent()
-	{
-		$this->_postProcess();
-		$this->_displayForm();
-        return $this->_html;		
-	}
-	
-	private function _postProcess()
-	{
-		if(Tools::isSubmit('submitUpdate'))
-		{
-			Configuration::updateValue('MODULEDEMO_TEST_TEXT', Tools::getValue('ourtext'), true);
-		    $html .=$this->displayConfirmation($this->l('Settings Updated'));
-		}
-	}
-	
-
-	
-    //public function hookDisplayHeader($params)
-    //{
-	  //  $this->context->controller->addCSS($this->_path. 'views/css/moduledemo.css');
-	    //$this->context->controller->addJS($this->_path. 'views/js/moduledemo.js');
-	//}
-
-    public function hookDisplayNav($params)
+    public function hookDisplayNav2($params)
     {
+		return $this->display(__FILE__, 'views/templates/hook/displayNav.tpl');
         //$this->context->smarty->assing('my_special_text', Configuration::get('MODULEDEMO_TEST_TEXT'));
-        return $this->display(__FILE__, 'displayNav.tpl');
+        
     }
+	
+
 }
