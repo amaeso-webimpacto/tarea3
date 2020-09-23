@@ -1,10 +1,10 @@
-<?xml version="1.0.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <module>
-<name>moduledemo</name>
-<displayName><![CDATA[tarea3]]></displayName>
+<name>tarea3</name>
+<displayName><![CDATA[tarea1]]></displayName>
 <version><![CDATA[1.0.0]]></version>
-<description><![CDATA[Modulo que llama a API del tiempo según localización del usuario]]></description>
-<author><![CDATA[ana]]></author>
+<description><![CDATA[Modulo de la tarea 3]]></description>
+<author><![CDATA[ana maeso]]></author>
 <tab><![CDATA[front_office_features]]></tab>
 <confirmUninstall><![CDATA[¿Desea desinstalar?]]></confirmUninstall>
 <is_configurable>0</is_configurable>
