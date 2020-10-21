@@ -1,5 +1,6 @@
 <?php
 
+
 if(!defined('_PS_VERSION_'))
 	exit;
 
@@ -48,10 +49,35 @@ class Tarea3 extends Module
 	
     public function hookDisplayNav2($params)
     {
-		return $this->display(__FILE__, 'views/templates/hook/displayNav.tpl');
-        //$this->context->smarty->assing('my_special_text', Configuration::get('MODULEDEMO_TEST_TEXT'));
-        
-    }
-	
+		/*
+		//método file_get_contents:
+		$variable = file_get_contents('http://api.weatherapi.com/v1/current.json?key=14f8ce7c6fc14acaaa480826202109&q=Chapineria');
+		$resultado = json_decode($variable);
 
+		echo "Temperatura: ", $resultado->current->temp_c, "ºC,    Presión: " , $resultado->current->pressure_mb, "mb,    Humedad: ", $resultado->current->humidity, "%"; 
+		*/
+
+		//método cURL
+		$handle = curl_init();
+		$url = ('http://api.weatherapi.com/v1/current.json?key=14f8ce7c6fc14acaaa480826202109&q=Chapineria');
+
+		curl_setopt($handle, CURLOPT_URL, $url);
+		curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+
+		$output = curl_exec($handle);
+
+		curl_close($handle);
+		$data = json_decode($output);
+
+		$this->smarty->assign(array(
+			'temp_c' => $data->current->temp_c,
+			'humidity' => $data->current->humidity,
+			'pressure_mb' => $data->current->pressure_mb
+			)
+		);
+
+		
+		//return $data->current->humidity;
+		return $this->display(__FILE__, 'tiempo.tpl');
+    }
 }
